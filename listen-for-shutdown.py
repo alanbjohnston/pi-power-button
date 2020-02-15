@@ -3,10 +3,20 @@
 
 import RPi.GPIO as GPIO
 import subprocess
-
+import time
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(3, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.wait_for_edge(3, GPIO.FALLING)
+GPIO.setup(26, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.wait_for_edge(26, GPIO.FALLING)
 
-subprocess.call(['shutdown', '-h', 'now'], shell=False)
+time.sleep(1)
+if GPIO.input(26):
+	print("sudo shutdown -h now")
+	subprocess.call(['shutdown', '-h', 'now'], shell=False)
+time.sleep(1)
+if GPIO.input(26):
+	print("sudo shutdown -h now")
+	subprocess.call(['shutdown', '-h', 'now'], shell=False)
+else:
+	print("sudo reboot now")
+	subprocess.call(['reboot', 'now'], shell=False)
