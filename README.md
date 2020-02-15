@@ -8,3 +8,8 @@ Scripts used in the [Pi power button guide](https://howchoo.com/g/mwnlytk3zmm/ho
 2. Run `script/install`
 
 That's it!
+
+Added 
+- reboot option by holding down button for 3 seconds
+- displays shutdown or reboot command 
+
