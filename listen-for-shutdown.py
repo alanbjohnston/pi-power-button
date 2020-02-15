@@ -19,4 +19,4 @@ if GPIO.input(26):
 	subprocess.call(['shutdown', '-h', 'now'], shell=False)
 else:
 	print("sudo reboot now")
-	subprocess.call(['reboot', 'now'], shell=False)
+	subprocess.call(['reboot', '-h', 'now'], shell=False)
