@@ -14,9 +14,9 @@ if GPIO.input(26):
 	print("sudo shutdown -h now")
 	GPIO.setup(10, GPIO.OUT)
 	GPIO.output(10, 0);
-	sleep(1);
+	time.sleep(1);
 	GPIO.output(10, 1);
-	sleep(1);
+	time.sleep(1);
 	GPIO.output(10, 0);
 	subprocess.call(['reboot', '-h', 'now'], shell=False)
 time.sleep(1)
