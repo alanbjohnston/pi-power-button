@@ -8,7 +8,7 @@ import time
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(26, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(12, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-if GPIO.input(12) == false:
+if GPIO.input(12) == False:
 	powerPin = 16
 else:
 	powerPin = 17
