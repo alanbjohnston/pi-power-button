@@ -30,43 +30,41 @@ if GPIO.input(26):
 	GPIO.output(powerPin, 0);
 	subprocess.call(['reboot', '-h', 'now'], shell=False)
 time.sleep(1)
+GPIO.setwarnings(False)
+GPIO.setup(powerPin, GPIO.OUT)
+GPIO.output(powerPin, 0);
+time.sleep(0.25);
+GPIO.output(powerPin, 1);
 if GPIO.input(26):
 	print("switch to AFSK")
-	GPIO.setwarnings(False)
-	GPIO.setup(powerPin, GPIO.OUT)
+	done = True;
+if (done == False):
 	GPIO.output(powerPin, 0);
 	time.sleep(0.25);
 	GPIO.output(powerPin, 1);
-	done = True;
+	time.sleep(0.25);
+	GPIO.output(powerPin, 0);
+	time.sleep(0.25);
+	GPIO.output(powerPin, 1);	
 time.sleep(1)
 if (GPIO.input(26) and (done == False)):
 	print("switch to FSK")
-	GPIO.setwarnings(False)
-	GPIO.setup(powerPin, GPIO.OUT)
-	GPIO.output(powerPin, 0);
-	time.sleep(0.25);
-	GPIO.output(powerPin, 1);
-	time.sleep(0.25);
-	GPIO.output(powerPin, 0);
-	time.sleep(0.25);
-	GPIO.output(powerPin, 1);
 	done = True;
+if (done == False):
+	GPIO.output(powerPin, 0);
+	time.sleep(0.25);
+	GPIO.output(powerPin, 1);
+	time.sleep(0.25);
+	GPIO.output(powerPin, 0);
+	time.sleep(0.25);
+	GPIO.output(powerPin, 1);	
+	time.sleep(0.25)
+	GPIO.output(powerPin, 0);
+	time.sleep(0.25);
+	GPIO.output(powerPin, 1);	
 time.sleep(1)
 if (GPIO.input(26) and (done == False)):
 	print("switch to BPSK")
-	GPIO.setwarnings(False)
-	GPIO.setup(powerPin, GPIO.OUT)
-	GPIO.output(powerPin, 0);
-	time.sleep(0.25);
-	GPIO.output(powerPin, 1);
-	time.sleep(0.25);
-	GPIO.output(powerPin, 0);
-	time.sleep(0.25);
-	GPIO.output(powerPin, 1);
-	time.sleep(0.25);
-	GPIO.output(powerPin, 0);
-	time.sleep(0.25);
-	GPIO.output(powerPin, 1);
 	done = True;
 time.sleep(1)
 if (done == False):
