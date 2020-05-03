@@ -27,13 +27,6 @@ while (True):
 		GPIO.setup(powerPin, GPIO.OUT)
 		GPIO.output(powerPin, 0);		
 		subprocess.call(['reboot', '-h', 'now'], shell=False)
-	time.sleep(2)
-	if GPIO.input(26):
-		print("sudo reboot -h now")
-		GPIO.setwarnings(False)
-		GPIO.setup(powerPin, GPIO.OUT)
-		GPIO.output(powerPin, 0);
-		subprocess.call(['reboot', '-h', 'now'], shell=False)
 	GPIO.output(powerPin, 0);
 	time.sleep(0.1);
 	GPIO.output(powerPin, 1);
