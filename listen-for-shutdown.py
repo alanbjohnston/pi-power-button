@@ -4,6 +4,7 @@
 import RPi.GPIO as GPIO
 import subprocess
 import time
+import sys
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(26, GPIO.IN, pull_up_down=GPIO.PUD_UP)
@@ -36,7 +37,7 @@ if GPIO.input(26):
 	GPIO.output(powerPin, 0);
 	time.sleep(0.25);
 	GPIO.output(powerPin, 1);
-	return
+	sys.exit();
 time.sleep(1)
 if GPIO.input(26):
 	print("switch to FSK")
