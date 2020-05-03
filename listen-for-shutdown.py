@@ -12,7 +12,10 @@ if GPIO.input(12) == False:
 	powerPin = 16
 else:
 	powerPin = 17
-	
+GPIO.setwarnings(False)
+GPIO.setup(powerPin, GPIO.OUT)
+GPIO.output(powerPin, 1);	
+
 while (True):	
 	GPIO.wait_for_edge(26, GPIO.FALLING)
 
