@@ -17,7 +17,7 @@ GPIO.setup(powerPin, GPIO.OUT)
 GPIO.output(powerPin, 1);	
 
 while (True):
-	sleep(1)
+	time.sleep(1)
 	GPIO.wait_for_edge(26, GPIO.FALLING)
 
 	done = False;
