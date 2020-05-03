@@ -39,7 +39,7 @@ if GPIO.input(26):
 	GPIO.output(powerPin, 1);
 	done = True;
 time.sleep(1)
-if (GPIO.input(26) AND (done == False)):
+if (GPIO.input(26) and (done == False)):
 	print("switch to FSK")
 	GPIO.setwarnings(False)
 	GPIO.setup(powerPin, GPIO.OUT)
@@ -52,7 +52,7 @@ if (GPIO.input(26) AND (done == False)):
 	GPIO.output(powerPin, 1);
 	done = True;
 time.sleep(1)
-if (GPIO.input(26) AND (done == False)):
+if (GPIO.input(26) and (done == False)):
 	print("switch to BPSK")
 	GPIO.setwarnings(False)
 	GPIO.setup(powerPin, GPIO.OUT)
