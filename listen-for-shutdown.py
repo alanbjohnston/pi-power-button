@@ -28,8 +28,31 @@ if GPIO.input(26):
 	GPIO.setup(powerPin, GPIO.OUT)
 	GPIO.output(powerPin, 0);
 	subprocess.call(['reboot', '-h', 'now'], shell=False)
-else:
-	print("sudo shutdown -h now")
+time.sleep(1)
+if GPIO.input(26):
+	print("switch to AFSK")
+	GPIO.setwarnings(False)
+	GPIO.setup(powerPin, GPIO.OUT)
+	GPIO.output(powerPin, 0);
+	time.sleep(0.25);
+	GPIO.output(powerPin, 1);
+	return
+time.sleep(1)
+if GPIO.input(26):
+	print("switch to FSK")
+	GPIO.setwarnings(False)
+	GPIO.setup(powerPin, GPIO.OUT)
+	GPIO.output(powerPin, 0);
+	time.sleep(0.25);
+	GPIO.output(powerPin, 1);
+	time.sleep(0.25);
+	GPIO.output(powerPin, 0);
+	time.sleep(0.25);
+	GPIO.output(powerPin, 1);
+	return
+time.sleep(1)
+if GPIO.input(26):
+	print("switch to BPSK")
 	GPIO.setwarnings(False)
 	GPIO.setup(powerPin, GPIO.OUT)
 	GPIO.output(powerPin, 0);
@@ -40,5 +63,21 @@ else:
 	time.sleep(0.25);
 	GPIO.output(powerPin, 1);
 	time.sleep(0.25);
+	GPIO.output(powerPin, 0);
+	time.sleep(0.25);
+	GPIO.output(powerPin, 1);
+	return
+else:
+	print("sudo shutdown -h now")
+	GPIO.setwarnings(False)
+	GPIO.setup(powerPin, GPIO.OUT)
+	GPIO.output(powerPin, 0);
+	time.sleep(0.5);
+	GPIO.output(powerPin, 1);
+	time.sleep(0.5);
+	GPIO.output(powerPin, 0);
+	time.sleep(0.5);
+	GPIO.output(powerPin, 1);
+	time.sleep(0.5);
 	GPIO.output(powerPin, 0);
 	subprocess.call(['shutdown', '-h', 'now'], shell=False)
