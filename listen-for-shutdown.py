@@ -31,12 +31,12 @@ while (True):
 		GPIO.setup(powerPin, GPIO.OUT)
 		GPIO.output(powerPin, 0);
 		subprocess.call(['reboot', '-h', 'now'], shell=False)
-	time.sleep(1)
 	GPIO.setwarnings(False)
 	GPIO.setup(powerPin, GPIO.OUT)
 	GPIO.output(powerPin, 0);
 	time.sleep(0.1);
 	GPIO.output(powerPin, 1);
+	time.sleep(1)
 	if GPIO.input(26):
 		print("switch to AFSK")
 		done = True;
