@@ -35,6 +35,10 @@ while (True):
 	time.sleep(1)
 	if GPIO.input(26):
 		print("switch to AFSK")
+		f = open("/home/pi/CubeSatSim/.mode", "w")
+		f.write("ARG1=a")
+		f.close()
+		os.system("sudo systemctl restart demo")
 		done = True;
 	if (done == False):
 		GPIO.output(powerPin, 0);
@@ -50,7 +54,7 @@ while (True):
 		f = open("/home/pi/CubeSatSim/.mode", "w")
 		f.write("ARG1=f")
 		f.close()
-		os.system("sudo systemctl restart test")
+		os.system("sudo systemctl restart demo")
 		done = True;
 	if (done == False):
 		GPIO.output(powerPin, 0);
@@ -70,7 +74,7 @@ while (True):
 		f = open("/home/pi/CubeSatSim/.mode", "w")
 		f.write("ARG1=b")
 		f.close()
-		os.system("sudo systemctl restart test")
+		os.system("sudo systemctl restart demo")
 		done = True;
 	# time.sleep(1)
 	if (done == False):
