@@ -49,7 +49,7 @@ while (True):
 		f = open("/home/pi/CubeSatSim/.mode", "w")
 		f.write("ARG1=f")
 		f.close()
-		os.system("sudo systemctl reload test")
+		os.system("sudo systemctl restart test")
 		done = True;
 	if (done == False):
 		GPIO.output(powerPin, 0);
@@ -69,7 +69,7 @@ while (True):
 		f = open("/home/pi/CubeSatSim/.mode", "w")
 		f.write("ARG1=b")
 		f.close()
-		os.system("sudo systemctl reload test")
+		os.system("sudo systemctl restart test")
 		done = True;
 	# time.sleep(1)
 	if (done == False):
