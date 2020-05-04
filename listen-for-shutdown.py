@@ -46,6 +46,10 @@ while (True):
 		time.sleep(1)
 	if (GPIO.input(26) and (done == False)):
 		print("switch to FSK")
+		f = open("/home/pi/CubeSatSim/.mode", "w")
+		f.write("ARG1=f")
+		f.close()
+		os.system("sudo systemctl reload test")
 		done = True;
 	if (done == False):
 		GPIO.output(powerPin, 0);
@@ -62,6 +66,10 @@ while (True):
 		time.sleep(1)
 	if (GPIO.input(26) and (done == False)):
 		print("switch to BPSK")
+		f = open("/home/pi/CubeSatSim/.mode", "w")
+		f.write("ARG1=b")
+		f.close()
+		os.system("sudo systemctl reload test")
 		done = True;
 	# time.sleep(1)
 	if (done == False):
