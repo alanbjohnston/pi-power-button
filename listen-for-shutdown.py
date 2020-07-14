@@ -38,8 +38,8 @@ while (True):
 		f = open("/home/pi/CubeSatSim/.mode", "w")
 		f.write("ARG1=a")
 		f.close()
-		os.system("sudo systemctl stop demo")
-		os.system("sudo systemctl start demo")
+		os.system("sudo systemctl stop cubesatsim")
+		os.system("sudo systemctl start cubesatsim")
 		done = True;
 	if (done == False):
 		GPIO.output(powerPin, 0);
@@ -55,8 +55,8 @@ while (True):
 		f = open("/home/pi/CubeSatSim/.mode", "w")
 		f.write("ARG1=f")
 		f.close()
-		os.system("sudo systemctl stop demo")
-		os.system("sudo systemctl start demo")
+		os.system("sudo systemctl stop cubesatsim")
+		os.system("sudo systemctl start cubesatsim")
 		done = True;
 	if (done == False):
 		GPIO.output(powerPin, 0);
@@ -76,8 +76,8 @@ while (True):
 		f = open("/home/pi/CubeSatSim/.mode", "w")
 		f.write("ARG1=b")
 		f.close()
-		os.system("sudo systemctl stop demo")
-		os.system("sudo systemctl start demo")
+		os.system("sudo systemctl stop cubesatsim")
+		os.system("sudo systemctl start cubesatsim")
 		done = True;
 	# time.sleep(1)
 	if (done == False):
