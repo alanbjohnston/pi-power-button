@@ -98,7 +98,7 @@ while (True):
 		time.sleep(1)
 	if (GPIO.input(26) and (release == False)):
 		print("switch to SSTV")
-		f = open("/home/pi/CubeSatSim/.mode", "s")
+		f = open("/home/pi/CubeSatSim/.mode", "w")
 		f.write("ARG1=s")
 		f.close()
 		os.system("sudo systemctl stop cubesatsim")
