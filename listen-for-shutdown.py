@@ -102,7 +102,7 @@ while (True):
 		f.write("ARG1=s")
 		f.close()
 		os.system("sudo systemctl stop cubesatsim")
-		os.system("sudo systemctl restart rpitx")
+		os.system("sudo systemctl start cubesatsim")
 		release = True;
 	if (release == False):
 		print("sudo shutdown -h now")
