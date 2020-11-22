@@ -30,6 +30,7 @@ while (True):
 		GPIO.output(powerPin, 0);		
 		subprocess.call(['reboot', '-h', 'now'], shell=False)
 		release = True;
+		time.sleep(10);
 	GPIO.output(powerPin, 0); # blink once
 	time.sleep(0.1);
 	GPIO.output(powerPin, 1);
