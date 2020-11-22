@@ -29,11 +29,12 @@ while (True):
 		GPIO.setup(powerPin, GPIO.OUT)
 		GPIO.output(powerPin, 0);		
 		subprocess.call(['reboot', '-h', 'now'], shell=False)
+		release = True;
 	GPIO.output(powerPin, 0); # blink once
 	time.sleep(0.1);
 	GPIO.output(powerPin, 1);
 	time.sleep(1)
-	if GPIO.input(26):
+	if (GPIO.input(26) and (release == False)):
 		print("switch to AFSK")
 		f = open("/home/pi/CubeSatSim/.mode", "w")
 		f.write("ARG1=a")
