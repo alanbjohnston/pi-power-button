@@ -22,7 +22,7 @@ while (True):
 	GPIO.wait_for_edge(26, GPIO.FALLING)
 
 	release = False;
-	time.sleep(1)
+	time.sleep(2)
 	if GPIO.input(26):
 		print("sudo reboot -h now")
 		GPIO.setwarnings(False)
