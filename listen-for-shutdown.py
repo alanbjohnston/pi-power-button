@@ -38,7 +38,7 @@ while (True):
 	if (GPIO.input(26) and (release == False)):
 		print("switch to AFSK")
 		f = open("/home/pi/CubeSatSim/.mode", "w")
-		f.write("ARG1=a")
+		f.write("a")
 		f.close()
 		os.system("sudo systemctl stop cubesatsim")
 		os.system("sudo systemctl start cubesatsim")
@@ -55,7 +55,7 @@ while (True):
 	if (GPIO.input(26) and (release == False)):
 		print("switch to FSK")
 		f = open("/home/pi/CubeSatSim/.mode", "w")
-		f.write("ARG1=f")
+		f.write("f")
 		f.close()
 		os.system("sudo systemctl stop cubesatsim")
 		os.system("sudo systemctl start cubesatsim")
@@ -76,7 +76,7 @@ while (True):
 	if (GPIO.input(26) and (release == False)):
 		print("switch to BPSK")
 		f = open("/home/pi/CubeSatSim/.mode", "w")
-		f.write("ARG1=b")
+		f.write("b")
 		f.close()
 		os.system("sudo systemctl stop cubesatsim")
 		os.system("sudo systemctl start cubesatsim")
@@ -101,7 +101,7 @@ while (True):
 	if (GPIO.input(26) and (release == False)):
 		print("switch to SSTV")
 		f = open("/home/pi/CubeSatSim/.mode", "w")
-		f.write("ARG1=s")
+		f.write("s")
 		f.close()
 		os.system("sudo systemctl stop cubesatsim")
 		os.system("sudo systemctl start cubesatsim")
