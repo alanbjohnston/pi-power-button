@@ -107,6 +107,35 @@ while (True):
 		os.system("sudo systemctl start cubesatsim")
 		release = True;
 	if (release == False):
+		GPIO.output(powerPin, 0); # blink five times
+		time.sleep(0.1);
+		GPIO.output(powerPin, 1);
+		time.sleep(0.1);
+		GPIO.output(powerPin, 0);
+		time.sleep(0.1);
+		GPIO.output(powerPin, 1);	
+		time.sleep(0.1)
+		GPIO.output(powerPin, 0);
+		time.sleep(0.1);
+		GPIO.output(powerPin, 1);	
+		time.sleep(0.1)
+		GPIO.output(powerPin, 0);
+		time.sleep(0.1);
+		GPIO.output(powerPin, 1);
+		time.sleep(0.1)
+		GPIO.output(powerPin, 0);
+		time.sleep(0.1);
+		GPIO.output(powerPin, 1);
+		time.sleep(1)
+	if (GPIO.input(26) and (release == False)):
+		print("switch to CW")
+		f = open("/home/pi/CubeSatSim/.mode", "w")
+		f.write("c")
+		f.close()
+		os.system("sudo systemctl stop cubesatsim")
+		os.system("sudo systemctl start cubesatsim")
+		release = True;
+	if (release == False):
 		print("sudo shutdown -h now")
 		GPIO.setwarnings(False)
 		GPIO.setup(powerPin, GPIO.OUT)
