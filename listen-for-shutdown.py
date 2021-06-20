@@ -130,7 +130,7 @@ while (True):
 	if (GPIO.input(26) and (release == False)):
 		print("switch to CW")
 		f = open("/home/pi/CubeSatSim/.mode", "w")
-		f.write("c")
+		f.write("m")
 		f.close()
 		os.system("sudo systemctl stop cubesatsim")
 		os.system("sudo systemctl start cubesatsim")
