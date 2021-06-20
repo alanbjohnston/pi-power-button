@@ -40,8 +40,7 @@ while (True):
 		f = open("/home/pi/CubeSatSim/.mode", "w")
 		f.write("a")
 		f.close()
-		os.system("sudo systemctl stop cubesatsim")
-		os.system("sudo systemctl start cubesatsim")
+		os.system("sudo systemctl restart cubesatsim")
 		release = True;
 	if (release == False):
 		GPIO.output(powerPin, 0); # blink twice
@@ -57,8 +56,7 @@ while (True):
 		f = open("/home/pi/CubeSatSim/.mode", "w")
 		f.write("f")
 		f.close()
-		os.system("sudo systemctl stop cubesatsim")
-		os.system("sudo systemctl start cubesatsim")
+		os.system("sudo systemctl restart cubesatsim")
 		release = True;
 	if (release == False):
 		GPIO.output(powerPin, 0); # blink three times
@@ -78,8 +76,7 @@ while (True):
 		f = open("/home/pi/CubeSatSim/.mode", "w")
 		f.write("b")
 		f.close()
-		os.system("sudo systemctl stop cubesatsim")
-		os.system("sudo systemctl start cubesatsim")
+		os.system("sudo systemctl restart cubesatsim")
 		release = True;
 	if (release == False):
 		GPIO.output(powerPin, 0); # blink four times
@@ -103,8 +100,7 @@ while (True):
 		f = open("/home/pi/CubeSatSim/.mode", "w")
 		f.write("s")
 		f.close()
-		os.system("sudo systemctl stop cubesatsim")
-		os.system("sudo systemctl start cubesatsim")
+		os.system("sudo systemctl restart cubesatsim")
 		release = True;
 	if (release == False):
 		GPIO.output(powerPin, 0); # blink five times
@@ -132,8 +128,7 @@ while (True):
 		f = open("/home/pi/CubeSatSim/.mode", "w")
 		f.write("m")
 		f.close()
-		os.system("sudo systemctl stop cubesatsim")
-		os.system("sudo systemctl start cubesatsim")
+		os.system("sudo systemctl restart cubesatsim")
 		release = True;
 	if (release == False):
 		print("sudo shutdown -h now")
