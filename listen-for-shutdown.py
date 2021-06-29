@@ -6,16 +6,21 @@ import subprocess
 import time
 import os
 
+txPin = 0
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(26, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(12, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 if GPIO.input(12) == False:
 	powerPin = 16
+	txPin = 27
+	GPIO.setwarnings(False)
+	GPIO.setup(txPin, GPIO.OUT)
+	GPIO.output(txPin, 0)
 else:
 	powerPin = 17
 GPIO.setwarnings(False)
 GPIO.setup(powerPin, GPIO.OUT)
-GPIO.output(powerPin, 1);	
+GPIO.output(powerPin, 1)	
 
 while (True):
 	time.sleep(1)
@@ -143,4 +148,7 @@ while (True):
 		GPIO.output(powerPin, 1);
 		time.sleep(0.5);
 		GPIO.output(powerPin, 0);
-		subprocess.call(['shutdown', '-h', 'now'], shell=False)
+		subprocess.call(['shutdown', '-h', 'now'], shell=False)	
+	if (txPin != 0):
+		GPIO.setwarnings(False)
+		GPIO.output(txPin, 0)		
