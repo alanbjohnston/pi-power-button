@@ -149,6 +149,15 @@ while (True):
 		time.sleep(0.5);
 		GPIO.output(powerPin, 0);
 		subprocess.call(['shutdown', '-h', 'now'], shell=False)	
-	if (txPin != 0):
+	else:
+		if (txPin != 0):
+			GPIO.setwarnings(False)
+		GPIO.output(txPin, 0)	
+		print("sudo reboot -h now")
 		GPIO.setwarnings(False)
-		GPIO.output(txPin, 0)		
+		GPIO.setup(powerPin, GPIO.OUT)
+		GPIO.output(powerPin, 0);		
+		subprocess.call(['reboot', '-h', 'now'], shell=False)
+		release = True;
+		time.sleep(10);
+	
