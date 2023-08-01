@@ -45,7 +45,8 @@ while (True):
 		f = open("/home/pi/CubeSatSim/.mode", "w")
 		f.write("a")
 		f.close()
-		os.system("sudo systemctl restart cubesatsim")
+		os.system("sudo sed -i ':a;N;$!ba;s/\nforce_turbo=1//g' /boot/config.txt")
+		# os.system("sudo systemctl restart cubesatsim")
 		release = True;
 	if (release == False):
 		GPIO.output(powerPin, 0); # blink twice
