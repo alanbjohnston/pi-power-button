@@ -61,7 +61,8 @@ while (True):
 		f = open("/home/pi/CubeSatSim/.mode", "w")
 		f.write("f")
 		f.close()
-		os.system("sudo systemctl restart cubesatsim")
+		os.system("if ! grep -q force_turbo=1 /boot/config.txt ; then sudo sh -c 'echo force_turbo=1 >> /boot/config.txt'; fi")
+		# os.system("sudo systemctl restart cubesatsim")
 		release = True;
 	if (release == False):
 		GPIO.output(powerPin, 0); # blink three times
@@ -81,7 +82,8 @@ while (True):
 		f = open("/home/pi/CubeSatSim/.mode", "w")
 		f.write("b")
 		f.close()
-		os.system("sudo systemctl restart cubesatsim")
+		os.system("if ! grep -q force_turbo=1 /boot/config.txt ; then sudo sh -c 'echo force_turbo=1 >> /boot/config.txt'; fi")
+		# os.system("sudo systemctl restart cubesatsim")
 		release = True;
 	if (release == False):
 		GPIO.output(powerPin, 0); # blink four times
@@ -105,7 +107,8 @@ while (True):
 		f = open("/home/pi/CubeSatSim/.mode", "w")
 		f.write("s")
 		f.close()
-		os.system("sudo systemctl restart cubesatsim")
+		os.system("sudo sed -i ':a;N;$!ba;s/\nforce_turbo=1//g' /boot/config.txt")
+		# os.system("sudo systemctl restart cubesatsim")
 		release = True;
 	if (release == False):
 		GPIO.output(powerPin, 0); # blink five times
@@ -133,7 +136,8 @@ while (True):
 		f = open("/home/pi/CubeSatSim/.mode", "w")
 		f.write("m")
 		f.close()
-		os.system("sudo systemctl restart cubesatsim")
+		os.system("sudo sed -i ':a;N;$!ba;s/\nforce_turbo=1//g' /boot/config.txt")
+		# os.system("sudo systemctl restart cubesatsim")
 		release = True;
 	if (release == False):
 		print("sudo shutdown -h now")
