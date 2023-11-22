@@ -42,10 +42,11 @@ while (True):
 	time.sleep(1.5)
 	if (GPIO.input(26) and (release == False)):
 		print("switch to AFSK")
-		f = open("/home/pi/CubeSatSim/.mode", "w")
-		f.write("a")
-		f.close()
-		os.system("sudo sed -i ':a;N;$!ba;s/\nforce_turbo=1//g' /boot/config.txt")
+		os.system("/home/pi/CubeSatSim/config -a")
+#		f = open("/home/pi/CubeSatSim/.mode", "w")
+#		f.write("a")
+#		f.close()
+#		os.system("sudo sed -i ':a;N;$!ba;s/\nforce_turbo=1//g' /boot/config.txt")
 		# os.system("sudo systemctl restart cubesatsim")
 		release = True;
 	if (release == False):
@@ -59,10 +60,11 @@ while (True):
 		time.sleep(1.5)
 	if (GPIO.input(26) and (release == False)):
 		print("switch to FSK")
-		f = open("/home/pi/CubeSatSim/.mode", "w")
-		f.write("f")
-		f.close()
-		os.system("if ! grep -q force_turbo=1 /boot/config.txt ; then sudo sh -c 'echo force_turbo=1 >> /boot/config.txt'; fi")
+		os.system("/home/pi/CubeSatSim/config -f")		
+#		f = open("/home/pi/CubeSatSim/.mode", "w")
+#		f.write("f")
+#		f.close()
+#		os.system("if ! grep -q force_turbo=1 /boot/config.txt ; then sudo sh -c 'echo force_turbo=1 >> /boot/config.txt'; fi")
 		# os.system("sudo systemctl restart cubesatsim")
 		release = True;
 	if (release == False):
@@ -80,10 +82,11 @@ while (True):
 		time.sleep(1.5)
 	if (GPIO.input(26) and (release == False)):
 		print("switch to BPSK")
-		f = open("/home/pi/CubeSatSim/.mode", "w")
-		f.write("b")
-		f.close()
-		os.system("if ! grep -q force_turbo=1 /boot/config.txt ; then sudo sh -c 'echo force_turbo=1 >> /boot/config.txt'; fi")
+		os.system("/home/pi/CubeSatSim/config -b")
+#		f = open("/home/pi/CubeSatSim/.mode", "w")
+#		f.write("b")
+#		f.close()
+#		os.system("if ! grep -q force_turbo=1 /boot/config.txt ; then sudo sh -c 'echo force_turbo=1 >> /boot/config.txt'; fi")
 		# os.system("sudo systemctl restart cubesatsim")
 		release = True;
 	if (release == False):
@@ -105,10 +108,11 @@ while (True):
 		time.sleep(1.5)
 	if (GPIO.input(26) and (release == False)):
 		print("switch to SSTV")
-		f = open("/home/pi/CubeSatSim/.mode", "w")
-		f.write("s")
-		f.close()
-		os.system("sudo sed -i ':a;N;$!ba;s/\nforce_turbo=1//g' /boot/config.txt")
+		os.system("/home/pi/CubeSatSim/config -s")
+#		f = open("/home/pi/CubeSatSim/.mode", "w")
+#		f.write("s")
+#		f.close()
+#		os.system("sudo sed -i ':a;N;$!ba;s/\nforce_turbo=1//g' /boot/config.txt")
 		# os.system("sudo systemctl restart cubesatsim")
 		release = True;
 	if (release == False):
@@ -134,10 +138,11 @@ while (True):
 		time.sleep(1.5)
 	if (GPIO.input(26) and (release == False)):
 		print("switch to CW")
-		f = open("/home/pi/CubeSatSim/.mode", "w")
-		f.write("m")
-		f.close()
-		os.system("sudo sed -i ':a;N;$!ba;s/\nforce_turbo=1//g' /boot/config.txt")
+		os.system("/home/pi/CubeSatSim/config -m")
+#		f = open("/home/pi/CubeSatSim/.mode", "w")
+#		f.write("m")
+#		f.close()
+#		os.system("sudo sed -i ':a;N;$!ba;s/\nforce_turbo=1//g' /boot/config.txt")
 		# os.system("sudo systemctl restart cubesatsim")
 		release = True;
 	if (release == False):
