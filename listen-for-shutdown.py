@@ -153,8 +153,11 @@ while (True):
 		GPIO.output(powerPin, 0);
 		time.sleep(0.5);
 		GPIO.output(powerPin, 1);
+		time.sleep(0.5);
+		GPIO.output(powerPin, 0);
+		time.sleep(0.5);
+		GPIO.output(powerPin, 1);
 		time.sleep(1.5);
-#		GPIO.output(powerPin, 0);
 	if (GPIO.input(26) and (release == False)):
 		print("sudo shutdown -h now")
 		GPIO.setwarnings(False)
@@ -173,10 +176,20 @@ while (True):
 		GPIO.output(powerPin, 0);	
 	if (GPIO.input(26) and (release == False)):
 		print("toggle command and control mode")
+
+		try:
+			f = open("/home/pi/CubeSatSim/command_control", "r")
+			f.close()
+			print("command and control will be deactivated")
+			subprocess.call(['sudo rm /home/pi/CubeSatSim/command_control'], shell=False)
+		except:
+			print("command and control will be activated")
+			subprocess.call(['touch /home/pi/CubeSatSim/command_control'], shell=False)
 	
 		GPIO.setwarnings(False)
 		GPIO.setup(powerPin, GPIO.OUT)
-		subprocess.call(['reboot', '-h', 'now'], shell=False)
+#		subprocess.call(['reboot', '-h', 'now'], shell=False)
+		subprocess.call(['sudo systemctl restart cubesatsim'], shell=False)
 		release = True;	
 	else:
 		if (txPin != 0):
