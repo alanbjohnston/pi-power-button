@@ -153,8 +153,8 @@ while (True):
 		GPIO.output(powerPin, 0);
 		time.sleep(0.5);
 		GPIO.output(powerPin, 1);
-		time.sleep(0.5);
-		GPIO.output(powerPin, 0);
+		time.sleep(1.5);
+#		GPIO.output(powerPin, 0);
 	if (GPIO.input(26) and (release == False)):
 		print("sudo shutdown -h now")
 		GPIO.setwarnings(False)
