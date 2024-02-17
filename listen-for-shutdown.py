@@ -168,9 +168,9 @@ while (True):
 		time.sleep(1.0);
 		GPIO.output(powerPin, 0);
 		time.sleep(1.0);
-#		GPIO.output(powerPin, 1);
-#		time.sleep(1.0);
-#		GPIO.output(powerPin, 0);	
+		GPIO.output(powerPin, 1);
+		time.sleep(1.0);
+		GPIO.output(powerPin, 0);	
 	if (GPIO.input(26) and (release == False)):
 		print("toggle command and control mode")
 	
