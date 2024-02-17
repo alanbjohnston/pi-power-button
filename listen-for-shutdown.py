@@ -174,7 +174,8 @@ while (True):
 		GPIO.output(powerPin, 1);
 		time.sleep(1.0);
 		GPIO.output(powerPin, 0);	
-	if (GPIO.input(26) and (release == False)):
+#	if (GPIO.input(26) and (release == False)):
+	else:	
 		print("toggle command and control mode")
 
 		try:
@@ -191,25 +192,14 @@ while (True):
 #		subprocess.call(['reboot', '-h', 'now'], shell=False)
 		subprocess.call(['sudo systemctl restart cubesatsim'], shell=False)
 		release = True;	
-	else:
-		if (txPin != 0):
-			GPIO.setwarnings(False)
-		GPIO.output(txPin, 0)	
-		print("sudo reboot -h now")
-		GPIO.setwarnings(False)
-		GPIO.setup(powerPin, GPIO.OUT)
-		GPIO.output(powerPin, 0);		
-		subprocess.call(['reboot', '-h', 'now'], shell=False)
-		release = True;
-		time.sleep(10);
-
-
-#	try:
-#		file = open("/home/pi/CubeSatSim/sim.cfg")
-#		config = file.readline().split()		
-#		callsign = config[0]
-#		if len(config) > 5:
-#			sq = config[5]
-#		else:	
-#			sq = '0'
-
+#	else:
+#		if (txPin != 0):
+#			GPIO.setwarnings(False)
+#		GPIO.output(txPin, 0)	
+#		print("sudo reboot -h now")
+#		GPIO.setwarnings(False)
+#		GPIO.setup(powerPin, GPIO.OUT)
+#		GPIO.output(powerPin, 0);		
+#		subprocess.call(['reboot', '-h', 'now'], shell=False)
+#		release = True;
+#		time.sleep(10);
