@@ -9,15 +9,16 @@ import os
 txPin = 0
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(26, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(12, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-if GPIO.input(12) == False:
-	powerPin = 16
-	txPin = 27
-	GPIO.setwarnings(False)
-	GPIO.setup(txPin, GPIO.OUT)
-	GPIO.output(txPin, 0)
-else:
-	powerPin = 17
+#GPIO.setup(12, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+#if GPIO.input(12) == False:
+#	powerPin = 16
+#	txPin = 27
+#	GPIO.setwarnings(False)
+#	GPIO.setup(txPin, GPIO.OUT)
+#	GPIO.output(txPin, 0)
+#else:
+#	powerPin = 17
+powerPin = 17
 GPIO.setwarnings(False)
 GPIO.setup(powerPin, GPIO.OUT)
 GPIO.output(powerPin, 1)	
