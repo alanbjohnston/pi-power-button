@@ -6,8 +6,6 @@ import subprocess
 import time
 import os
 
-lockout = False
-
 txPin = 0
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(26, GPIO.IN, pull_up_down=GPIO.PUD_UP)
@@ -27,198 +25,193 @@ GPIO.output(powerPin, 1)
 while (True):
 	time.sleep(1)
 	GPIO.wait_for_edge(26, GPIO.FALLING)
-	if not lockout:
-#		os.system("echo 'setting lockout'")
-#		lockout = True;	
-		release = False;
-		time.sleep(1)
-		if GPIO.input(26):
-			os.system("echo 'sudo reboot -h now #'")
-			GPIO.setwarnings(False)
-			GPIO.setup(powerPin, GPIO.OUT)
-			GPIO.output(powerPin, 0);		
-	#		subprocess.call(['reboot', '-h', 'now'], shell=False)
-			release = True;
+	release = False;
+	time.sleep(1)
+	if GPIO.input(26):
+		os.system("echo 'sudo reboot -h now #'")
+		GPIO.setwarnings(False)
+		GPIO.setup(powerPin, GPIO.OUT)
+		GPIO.output(powerPin, 0);		
+#		subprocess.call(['reboot', '-h', 'now'], shell=False)
+		release = True;
 #			time.sleep(10);
-		GPIO.output(powerPin, 0); # blink once
-		time.sleep(0.1);
-		GPIO.output(powerPin, 1);
-		time.sleep(1.5)
-		if (GPIO.input(26) and (release == False)):
-			os.system("echo 'switch to AFSK'")
+	GPIO.output(powerPin, 0); # blink once
+	time.sleep(0.1);
+	GPIO.output(powerPin, 1);
+	time.sleep(1.5)
+	if (GPIO.input(26) and (release == False)):
+		os.system("echo 'switch to AFSK'")
 #			os.system("echo 'starting sleep a'")
 #			time.sleep(10)
 #			os.system("echo 'ending sleep a'")
-			
-			os.system("/home/pi/CubeSatSim/config -a n")
-	#		f = open("/home/pi/CubeSatSim/.mode", "w")
-	#		f.write("a")
-	#		f.close()
-	#		os.system("sudo sed -i ':a;N;$!ba;s/\nforce_turbo=1//g' /boot/config.txt")
-			# os.system("sudo systemctl restart cubesatsim")
-			release = True;
-		if (release == False):
-			GPIO.output(powerPin, 0); # blink twice
-			time.sleep(0.1);
-			GPIO.output(powerPin, 1);
-			time.sleep(0.1);
-			GPIO.output(powerPin, 0);
-			time.sleep(0.1);
-			GPIO.output(powerPin, 1);	
-			time.sleep(1.5)
-		if (GPIO.input(26) and (release == False)):
-			os.system("echo 'switch to FSK'")
-			os.system("/home/pi/CubeSatSim/config -f n")		
-	#		f = open("/home/pi/CubeSatSim/.mode", "w")
-	#		f.write("f")
-	#		f.close()
-	#		os.system("if ! grep -q force_turbo=1 /boot/config.txt ; then sudo sh -c 'echo force_turbo=1 >> /boot/config.txt'; fi")
-			# os.system("sudo systemctl restart cubesatsim")
-			release = True;
-		if (release == False):
-			GPIO.output(powerPin, 0); # blink three times
-			time.sleep(0.1);
-			GPIO.output(powerPin, 1);
-			time.sleep(0.1);
-			GPIO.output(powerPin, 0);
-			time.sleep(0.1);
-			GPIO.output(powerPin, 1);	
-			time.sleep(0.1)
-			GPIO.output(powerPin, 0);
-			time.sleep(0.1);
-			GPIO.output(powerPin, 1);	
-			time.sleep(1.5)
-		if (GPIO.input(26) and (release == False)):
-			os.system("echo 'switch to BPSK'")
-			os.system("/home/pi/CubeSatSim/config -b n")
-	#		f = open("/home/pi/CubeSatSim/.mode", "w")
-	#		f.write("b")
-	#		f.close()
-	#		os.system("if ! grep -q force_turbo=1 /boot/config.txt ; then sudo sh -c 'echo force_turbo=1 >> /boot/config.txt'; fi")
-			# os.system("sudo systemctl restart cubesatsim")
-			release = True;
-		if (release == False):
-			GPIO.output(powerPin, 0); # blink four times
-			time.sleep(0.1);
-			GPIO.output(powerPin, 1);
-			time.sleep(0.1);
-			GPIO.output(powerPin, 0);
-			time.sleep(0.1);
-			GPIO.output(powerPin, 1);	
-			time.sleep(0.1)
-			GPIO.output(powerPin, 0);
-			time.sleep(0.1);
-			GPIO.output(powerPin, 1);	
-			time.sleep(0.1)
-			GPIO.output(powerPin, 0);
-			time.sleep(0.1);
-			GPIO.output(powerPin, 1);
-			time.sleep(1.5)
-		if (GPIO.input(26) and (release == False)):
-			os.system("echo 'switch to SSTV'")
-			os.system("/home/pi/CubeSatSim/config -s n")
-	#		f = open("/home/pi/CubeSatSim/.mode", "w")
-	#		f.write("s")
-	#		f.close()
-	#		os.system("sudo sed -i ':a;N;$!ba;s/\nforce_turbo=1//g' /boot/config.txt")
-			# os.system("sudo systemctl restart cubesatsim")
-			release = True;
-		if (release == False):
-			GPIO.output(powerPin, 0); # blink five times
-			time.sleep(0.1);
-			GPIO.output(powerPin, 1);
-			time.sleep(0.1);
-			GPIO.output(powerPin, 0);
-			time.sleep(0.1);
-			GPIO.output(powerPin, 1);	
-			time.sleep(0.1)
-			GPIO.output(powerPin, 0);
-			time.sleep(0.1);
-			GPIO.output(powerPin, 1);	
-			time.sleep(0.1)
-			GPIO.output(powerPin, 0);
-			time.sleep(0.1);
-			GPIO.output(powerPin, 1);
-			time.sleep(0.1)
-			GPIO.output(powerPin, 0);
-			time.sleep(0.1);
-			GPIO.output(powerPin, 1);
-			time.sleep(1.5)
-		if (GPIO.input(26) and (release == False)):
-			os.system("echo 'switch to CW'")
-			os.system("/home/pi/CubeSatSim/config -m n")
-	#		f = open("/home/pi/CubeSatSim/.mode", "w")
-	#		f.write("m")
-	#		f.close()
-	#		os.system("sudo sed -i ':a;N;$!ba;s/\nforce_turbo=1//g' /boot/config.txt")
-			# os.system("sudo systemctl restart cubesatsim")
-			release = True;
-		if (release == False):
-			GPIO.output(powerPin, 0); # blink slowly to indicate shutdown
-			time.sleep(0.5);
-			GPIO.output(powerPin, 1);
-			time.sleep(0.5);
-			GPIO.output(powerPin, 0);
-			time.sleep(0.5);
-			GPIO.output(powerPin, 1);
-			time.sleep(0.5);
-			GPIO.output(powerPin, 0);
-			time.sleep(0.5);
-			GPIO.output(powerPin, 1);
-			time.sleep(1.5);
-		if (GPIO.input(26) and (release == False)):
-			os.system("echo 'sudo shutdown -h now'")
-			GPIO.setwarnings(False)
-			GPIO.setup(powerPin, GPIO.OUT)
-	#		subprocess.call(['shutdown', '-h', 'now'], shell=False)
-			release = True;
-		if (release == False):
-			GPIO.output(powerPin, 0); # blink very slowly to indicate cc toggle
-			time.sleep(1.0);
-			GPIO.output(powerPin, 1);
-			time.sleep(1.0);
-			GPIO.output(powerPin, 0);
-			time.sleep(1.0);
-			GPIO.output(powerPin, 1);
-			time.sleep(1.0);
-			GPIO.output(powerPin, 0);
-			time.sleep(1.0);
-			GPIO.output(powerPin, 1);
-	#		time.sleep(1.0);
-	#		GPIO.output(powerPin, 0);	
-	#	if (GPIO.input(26) and (release == False)):
-	#	else:	
-			os.system("echo 'toggle command and control mode'")
 		
-			try:
-				f = open("/home/pi/CubeSatSim/command_control", "r")
-				f.close()
-				os.system("echo 'command and control will be deactivated'")
-				os.system('sudo rm /home/pi/CubeSatSim/command_control')
-			except:
-				os.system("echo 'command and control will be activated'")
-				os.system('touch /home/pi/CubeSatSim/command_control')
-		
-			GPIO.setwarnings(False)
-			GPIO.setup(powerPin, GPIO.OUT)
-	#		subprocess.call(['reboot', '-h', 'now'], shell=False)
-			os.system('sudo systemctl restart cubesatsim')
-		#	release = True;	
+		os.system("/home/pi/CubeSatSim/config -a n")
+#		f = open("/home/pi/CubeSatSim/.mode", "w")
+#		f.write("a")
+#		f.close()
+#		os.system("sudo sed -i ':a;N;$!ba;s/\nforce_turbo=1//g' /boot/config.txt")
+		# os.system("sudo systemctl restart cubesatsim")
+		release = True;
+	if (release == False):
+		GPIO.output(powerPin, 0); # blink twice
+		time.sleep(0.1);
+		GPIO.output(powerPin, 1);
+		time.sleep(0.1);
+		GPIO.output(powerPin, 0);
+		time.sleep(0.1);
+		GPIO.output(powerPin, 1);	
+		time.sleep(1.5)
+	if (GPIO.input(26) and (release == False)):
+		os.system("echo 'switch to FSK'")
+		os.system("/home/pi/CubeSatSim/config -f n")		
+#		f = open("/home/pi/CubeSatSim/.mode", "w")
+#		f.write("f")
+#		f.close()
+#		os.system("if ! grep -q force_turbo=1 /boot/config.txt ; then sudo sh -c 'echo force_turbo=1 >> /boot/config.txt'; fi")
+		# os.system("sudo systemctl restart cubesatsim")
+		release = True;
+	if (release == False):
+		GPIO.output(powerPin, 0); # blink three times
+		time.sleep(0.1);
+		GPIO.output(powerPin, 1);
+		time.sleep(0.1);
+		GPIO.output(powerPin, 0);
+		time.sleep(0.1);
+		GPIO.output(powerPin, 1);	
+		time.sleep(0.1)
+		GPIO.output(powerPin, 0);
+		time.sleep(0.1);
+		GPIO.output(powerPin, 1);	
+		time.sleep(1.5)
+	if (GPIO.input(26) and (release == False)):
+		os.system("echo 'switch to BPSK'")
+		os.system("/home/pi/CubeSatSim/config -b n")
+#		f = open("/home/pi/CubeSatSim/.mode", "w")
+#		f.write("b")
+#		f.close()
+#		os.system("if ! grep -q force_turbo=1 /boot/config.txt ; then sudo sh -c 'echo force_turbo=1 >> /boot/config.txt'; fi")
+		# os.system("sudo systemctl restart cubesatsim")
+		release = True;
+	if (release == False):
+		GPIO.output(powerPin, 0); # blink four times
+		time.sleep(0.1);
+		GPIO.output(powerPin, 1);
+		time.sleep(0.1);
+		GPIO.output(powerPin, 0);
+		time.sleep(0.1);
+		GPIO.output(powerPin, 1);	
+		time.sleep(0.1)
+		GPIO.output(powerPin, 0);
+		time.sleep(0.1);
+		GPIO.output(powerPin, 1);	
+		time.sleep(0.1)
+		GPIO.output(powerPin, 0);
+		time.sleep(0.1);
+		GPIO.output(powerPin, 1);
+		time.sleep(1.5)
+	if (GPIO.input(26) and (release == False)):
+		os.system("echo 'switch to SSTV'")
+		os.system("/home/pi/CubeSatSim/config -s n")
+#		f = open("/home/pi/CubeSatSim/.mode", "w")
+#		f.write("s")
+#		f.close()
+#		os.system("sudo sed -i ':a;N;$!ba;s/\nforce_turbo=1//g' /boot/config.txt")
+		# os.system("sudo systemctl restart cubesatsim")
+		release = True;
+	if (release == False):
+		GPIO.output(powerPin, 0); # blink five times
+		time.sleep(0.1);
+		GPIO.output(powerPin, 1);
+		time.sleep(0.1);
+		GPIO.output(powerPin, 0);
+		time.sleep(0.1);
+		GPIO.output(powerPin, 1);	
+		time.sleep(0.1)
+		GPIO.output(powerPin, 0);
+		time.sleep(0.1);
+		GPIO.output(powerPin, 1);	
+		time.sleep(0.1)
+		GPIO.output(powerPin, 0);
+		time.sleep(0.1);
+		GPIO.output(powerPin, 1);
+		time.sleep(0.1)
+		GPIO.output(powerPin, 0);
+		time.sleep(0.1);
+		GPIO.output(powerPin, 1);
+		time.sleep(1.5)
+	if (GPIO.input(26) and (release == False)):
+		os.system("echo 'switch to CW'")
+		os.system("/home/pi/CubeSatSim/config -m n")
+#		f = open("/home/pi/CubeSatSim/.mode", "w")
+#		f.write("m")
+#		f.close()
+#		os.system("sudo sed -i ':a;N;$!ba;s/\nforce_turbo=1//g' /boot/config.txt")
+		# os.system("sudo systemctl restart cubesatsim")
+		release = True;
+	if (release == False):
+		GPIO.output(powerPin, 0); # blink slowly to indicate shutdown
+		time.sleep(0.5);
+		GPIO.output(powerPin, 1);
+		time.sleep(0.5);
+		GPIO.output(powerPin, 0);
+		time.sleep(0.5);
+		GPIO.output(powerPin, 1);
+		time.sleep(0.5);
+		GPIO.output(powerPin, 0);
+		time.sleep(0.5);
+		GPIO.output(powerPin, 1);
+		time.sleep(1.5);
+	if (GPIO.input(26) and (release == False)):
+		os.system("echo 'sudo shutdown -h now'")
+		GPIO.setwarnings(False)
+		GPIO.setup(powerPin, GPIO.OUT)
+#		subprocess.call(['shutdown', '-h', 'now'], shell=False)
+		release = True;
+	if (release == False):
+		GPIO.output(powerPin, 0); # blink very slowly to indicate cc toggle
+		time.sleep(1.0);
+		GPIO.output(powerPin, 1);
+		time.sleep(1.0);
+		GPIO.output(powerPin, 0);
+		time.sleep(1.0);
+		GPIO.output(powerPin, 1);
+		time.sleep(1.0);
+		GPIO.output(powerPin, 0);
+		time.sleep(1.0);
+		GPIO.output(powerPin, 1);
+#		time.sleep(1.0);
+#		GPIO.output(powerPin, 0);	
+#	if (GPIO.input(26) and (release == False)):
+#	else:	
+		os.system("echo 'toggle command and control mode'")
 	
-		##else:
-		##	if (txPin != 0):
-		##		GPIO.setwarnings(False)
-		##	GPIO.output(txPin, 0)	
-		##	os.system("echo 'sudo reboot -h now'")
-		##	GPIO.setwarnings(False)
-		##	GPIO.setup(powerPin, GPIO.OUT)
-		##	GPIO.output(powerPin, 0);		
-	#		subprocess.call(['reboot', '-h', 'now'], shell=False)
-		##	release = True;
-		##	time.sleep(10);
-		os.system("echo 'starting sleep'")
-		time.sleep(10)
-		os.system("echo 'ending sleep'")
-#		lockout = False;
-#		os.system("echo 'clearing lockout'")
-		
+		try:
+			f = open("/home/pi/CubeSatSim/command_control", "r")
+			f.close()
+			os.system("echo 'command and control will be deactivated'")
+			os.system('sudo rm /home/pi/CubeSatSim/command_control')
+		except:
+			os.system("echo 'command and control will be activated'")
+			os.system('touch /home/pi/CubeSatSim/command_control')
+	
+		GPIO.setwarnings(False)
+		GPIO.setup(powerPin, GPIO.OUT)
+#		subprocess.call(['reboot', '-h', 'now'], shell=False)
+		os.system('sudo systemctl restart cubesatsim')
+	#	release = True;	
+
+	##else:
+	##	if (txPin != 0):
+	##		GPIO.setwarnings(False)
+	##	GPIO.output(txPin, 0)	
+	##	os.system("echo 'sudo reboot -h now'")
+	##	GPIO.setwarnings(False)
+	##	GPIO.setup(powerPin, GPIO.OUT)
+	##	GPIO.output(powerPin, 0);		
+#		subprocess.call(['reboot', '-h', 'now'], shell=False)
+	##	release = True;
+	##	time.sleep(10);
+	os.system("echo 'starting sleep'")
+	time.sleep(10)
+	os.system("echo 'ending sleep'")
+	
