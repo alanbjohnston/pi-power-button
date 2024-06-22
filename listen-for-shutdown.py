@@ -6,6 +6,8 @@ import subprocess
 import time
 import os
 
+lockout = False
+
 txPin = 0
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(26, GPIO.IN, pull_up_down=GPIO.PUD_UP)
@@ -21,8 +23,6 @@ else:
 GPIO.setwarnings(False)
 GPIO.setup(powerPin, GPIO.OUT)
 GPIO.output(powerPin, 1)
-
-lockout = False
 
 while (True):
 	time.sleep(1)
