@@ -143,6 +143,7 @@ while (True):
 		time.sleep(1.5)
 	if (GPIO.input(26) and (release == False)):
 		print("switch to CW")
+		os.system("echo 'switch to CW due to push button!' | wall")
 		os.system("/home/pi/CubeSatSim/config -m")
 #		f = open("/home/pi/CubeSatSim/.mode", "w")
 #		f.write("m")
