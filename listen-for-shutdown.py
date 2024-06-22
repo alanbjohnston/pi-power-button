@@ -29,7 +29,7 @@ while (True):
 	release = False;
 	time.sleep(1)
 	if GPIO.input(26):
-		os.system("echo 'sudo reboot -h now'")
+		os.system("echo 'sudo reboot -h now' #")
 		GPIO.setwarnings(False)
 		GPIO.setup(powerPin, GPIO.OUT)
 		GPIO.output(powerPin, 0);		
