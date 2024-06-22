@@ -42,6 +42,10 @@ while (True):
 	time.sleep(1.5)
 	if (GPIO.input(26) and (release == False)):
 		os.system("echo 'switch to AFSK'")
+		os.system("echo 'starting sleep a'")
+		time.sleep(10)
+		os.system("echo 'ending sleep a'")
+		
 		os.system("/home/pi/CubeSatSim/config -a n")
 #		f = open("/home/pi/CubeSatSim/.mode", "w")
 #		f.write("a")
