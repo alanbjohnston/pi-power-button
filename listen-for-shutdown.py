@@ -208,3 +208,4 @@ while (True):
 #		subprocess.call(['reboot', '-h', 'now'], shell=False)
 	##	release = True;
 	##	time.sleep(10);
+	time.sleep(10);
