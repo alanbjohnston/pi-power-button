@@ -29,11 +29,11 @@ while (True):
 	release = False;
 	time.sleep(1)
 	if GPIO.input(26):
-		print("sudo reboot -h now")
+		os.system("echo 'sudo reboot -h now'")
 		GPIO.setwarnings(False)
 		GPIO.setup(powerPin, GPIO.OUT)
 		GPIO.output(powerPin, 0);		
-		subprocess.call(['reboot', '-h', 'now'], shell=False)
+#		subprocess.call(['reboot', '-h', 'now'], shell=False)
 		release = True;
 		time.sleep(10);
 	GPIO.output(powerPin, 0); # blink once
@@ -41,8 +41,8 @@ while (True):
 	GPIO.output(powerPin, 1);
 	time.sleep(1.5)
 	if (GPIO.input(26) and (release == False)):
-		print("switch to AFSK")
-		os.system("/home/pi/CubeSatSim/config -a")
+		os.system("echo 'switch to AFSK'")
+		os.system("/home/pi/CubeSatSim/config -a n")
 #		f = open("/home/pi/CubeSatSim/.mode", "w")
 #		f.write("a")
 #		f.close()
@@ -59,8 +59,8 @@ while (True):
 		GPIO.output(powerPin, 1);	
 		time.sleep(1.5)
 	if (GPIO.input(26) and (release == False)):
-		print("switch to FSK")
-		os.system("/home/pi/CubeSatSim/config -f")		
+		os.system("echo 'switch to FSK'")
+		os.system("/home/pi/CubeSatSim/config -f n")		
 #		f = open("/home/pi/CubeSatSim/.mode", "w")
 #		f.write("f")
 #		f.close()
@@ -81,8 +81,8 @@ while (True):
 		GPIO.output(powerPin, 1);	
 		time.sleep(1.5)
 	if (GPIO.input(26) and (release == False)):
-		print("switch to BPSK")
-		os.system("/home/pi/CubeSatSim/config -b")
+		os.system("echo 'switch to BPSK'")
+		os.system("/home/pi/CubeSatSim/config -b n")
 #		f = open("/home/pi/CubeSatSim/.mode", "w")
 #		f.write("b")
 #		f.close()
@@ -107,8 +107,8 @@ while (True):
 		GPIO.output(powerPin, 1);
 		time.sleep(1.5)
 	if (GPIO.input(26) and (release == False)):
-		print("switch to SSTV")
-		os.system("/home/pi/CubeSatSim/config -s")
+		os.system("echo 'switch to SSTV'")
+		os.system("/home/pi/CubeSatSim/config -s n")
 #		f = open("/home/pi/CubeSatSim/.mode", "w")
 #		f.write("s")
 #		f.close()
@@ -137,8 +137,8 @@ while (True):
 		GPIO.output(powerPin, 1);
 		time.sleep(1.5)
 	if (GPIO.input(26) and (release == False)):
-		print("switch to CW")
-		os.system("/home/pi/CubeSatSim/config -m")
+		os.system("echo 'switch to CW'")
+		os.system("/home/pi/CubeSatSim/config -m n")
 #		f = open("/home/pi/CubeSatSim/.mode", "w")
 #		f.write("m")
 #		f.close()
@@ -159,10 +159,10 @@ while (True):
 		GPIO.output(powerPin, 1);
 		time.sleep(1.5);
 	if (GPIO.input(26) and (release == False)):
-		print("sudo shutdown -h now")
+		os.system("echo 'sudo shutdown -h now'")
 		GPIO.setwarnings(False)
 		GPIO.setup(powerPin, GPIO.OUT)
-		subprocess.call(['shutdown', '-h', 'now'], shell=False)
+#		subprocess.call(['shutdown', '-h', 'now'], shell=False)
 		release = True;
 	if (release == False):
 		GPIO.output(powerPin, 0); # blink very slowly to indicate cc toggle
@@ -180,20 +180,20 @@ while (True):
 #		GPIO.output(powerPin, 0);	
 #	if (GPIO.input(26) and (release == False)):
 #	else:	
-		print("toggle command and control mode")
+		os.system("echo 'toggle command and control mode'")
 	
 		try:
 			f = open("/home/pi/CubeSatSim/command_control", "r")
 			f.close()
-			print("command and control will be deactivated")
+			os.system("echo 'command and control will be deactivated'")
 			os.system('sudo rm /home/pi/CubeSatSim/command_control')
 		except:
-			print("command and control will be activated")
+			os.system("echo 'command and control will be activated'")
 			os.system('touch /home/pi/CubeSatSim/command_control')
 	
 		GPIO.setwarnings(False)
 		GPIO.setup(powerPin, GPIO.OUT)
-		subprocess.call(['reboot', '-h', 'now'], shell=False)
+#		subprocess.call(['reboot', '-h', 'now'], shell=False)
 	#	os.system('sudo systemctl restart cubesatsim')
 	#	release = True;	
 
@@ -201,10 +201,10 @@ while (True):
 		if (txPin != 0):
 			GPIO.setwarnings(False)
 		GPIO.output(txPin, 0)	
-		print("sudo reboot -h now")
+		os.system("echo 'sudo reboot -h now'")
 		GPIO.setwarnings(False)
 		GPIO.setup(powerPin, GPIO.OUT)
 		GPIO.output(powerPin, 0);		
-		subprocess.call(['reboot', '-h', 'now'], shell=False)
+#		subprocess.call(['reboot', '-h', 'now'], shell=False)
 		release = True;
 		time.sleep(10);
