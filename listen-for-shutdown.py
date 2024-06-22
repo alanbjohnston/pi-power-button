@@ -30,6 +30,7 @@ while (True):
 	time.sleep(1)
 	if GPIO.input(26):
 		print("sudo reboot -h now")
+		os.system("echo 'reboot due to push button!' | wall")
 		GPIO.setwarnings(False)
 		GPIO.setup(powerPin, GPIO.OUT)
 		GPIO.output(powerPin, 0);		
@@ -42,6 +43,7 @@ while (True):
 	time.sleep(1.5)
 	if (GPIO.input(26) and (release == False)):
 		print("switch to AFSK")
+		os.system("echo 'switch to AFSK due to push button!' | wall")
 		os.system("/home/pi/CubeSatSim/config -a")
 #		f = open("/home/pi/CubeSatSim/.mode", "w")
 #		f.write("a")
@@ -60,6 +62,7 @@ while (True):
 		time.sleep(1.5)
 	if (GPIO.input(26) and (release == False)):
 		print("switch to FSK")
+		os.system("echo 'switch to FSK due to push button!' | wall")
 		os.system("/home/pi/CubeSatSim/config -f")		
 #		f = open("/home/pi/CubeSatSim/.mode", "w")
 #		f.write("f")
@@ -82,6 +85,7 @@ while (True):
 		time.sleep(1.5)
 	if (GPIO.input(26) and (release == False)):
 		print("switch to BPSK")
+		os.system("echo 'switch to BPSK due to push button!' | wall")
 		os.system("/home/pi/CubeSatSim/config -b")
 #		f = open("/home/pi/CubeSatSim/.mode", "w")
 #		f.write("b")
@@ -108,6 +112,7 @@ while (True):
 		time.sleep(1.5)
 	if (GPIO.input(26) and (release == False)):
 		print("switch to SSTV")
+		os.system("echo 'switch to SSTV due to push button!' | wall")
 		os.system("/home/pi/CubeSatSim/config -s")
 #		f = open("/home/pi/CubeSatSim/.mode", "w")
 #		f.write("s")
@@ -160,6 +165,7 @@ while (True):
 		time.sleep(1.5);
 	if (GPIO.input(26) and (release == False)):
 		print("sudo shutdown -h now")
+		os.system("echo 'shutdown due to push button!' | wall")
 		GPIO.setwarnings(False)
 		GPIO.setup(powerPin, GPIO.OUT)
 		subprocess.call(['shutdown', '-h', 'now'], shell=False)
@@ -186,9 +192,11 @@ while (True):
 			f = open("/home/pi/CubeSatSim/command_control", "r")
 			f.close()
 			print("command and control will be deactivated")
+			os.system("echo 'command and control activated due to push button!' | wall")
 			os.system('sudo rm /home/pi/CubeSatSim/command_control')
 		except:
 			print("command and control will be activated")
+			os.system("echo 'command and control activated due to push button!' | wall")
 			os.system('touch /home/pi/CubeSatSim/command_control')
 	
 		GPIO.setwarnings(False)
