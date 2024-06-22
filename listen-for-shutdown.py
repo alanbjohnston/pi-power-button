@@ -30,7 +30,7 @@ while (True):
 	if not lockout:
 #		os.system("echo 'setting lockout'")
 #		lockout = True;	
-#		release = False;
+		release = False;
 		time.sleep(1)
 		if GPIO.input(26):
 			os.system("echo 'sudo reboot -h now #'")
