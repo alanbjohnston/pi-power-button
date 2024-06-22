@@ -28,9 +28,9 @@ while (True):
 	time.sleep(1)
 	GPIO.wait_for_edge(26, GPIO.FALLING)
 	if not lockout:
-		os.system("echo 'setting lockout'")
-		lockout = True;	
-		release = False;
+#		os.system("echo 'setting lockout'")
+#		lockout = True;	
+#		release = False;
 		time.sleep(1)
 		if GPIO.input(26):
 			os.system("echo 'sudo reboot -h now #'")
@@ -219,6 +219,6 @@ while (True):
 		os.system("echo 'starting sleep'")
 		time.sleep(10)
 		os.system("echo 'ending sleep'")
-		lockout = False;
-		os.system("echo 'clearing lockout'")
+#		lockout = False;
+#		os.system("echo 'clearing lockout'")
 		
