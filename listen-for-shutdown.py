@@ -28,6 +28,7 @@ while (True):
 	time.sleep(1)
 	GPIO.wait_for_edge(26, GPIO.FALLING)
 	if not lockout:
+		os.system("echo 'setting lockout")
 		lockout = True;	
 		release = False;
 		time.sleep(1)
@@ -219,4 +220,5 @@ while (True):
 		time.sleep(10)
 		os.system("echo 'ending sleep'")
 		lockout = False;
+		os.system("echo 'clearing lockout")
 		
