@@ -194,17 +194,17 @@ while (True):
 		GPIO.setwarnings(False)
 		GPIO.setup(powerPin, GPIO.OUT)
 #		subprocess.call(['reboot', '-h', 'now'], shell=False)
-	#	os.system('sudo systemctl restart cubesatsim')
+		os.system('sudo systemctl restart cubesatsim')
 	#	release = True;	
 
-	else:
-		if (txPin != 0):
-			GPIO.setwarnings(False)
-		GPIO.output(txPin, 0)	
-		os.system("echo 'sudo reboot -h now'")
-		GPIO.setwarnings(False)
-		GPIO.setup(powerPin, GPIO.OUT)
-		GPIO.output(powerPin, 0);		
+	##else:
+	##	if (txPin != 0):
+	##		GPIO.setwarnings(False)
+	##	GPIO.output(txPin, 0)	
+	##	os.system("echo 'sudo reboot -h now'")
+	##	GPIO.setwarnings(False)
+	##	GPIO.setup(powerPin, GPIO.OUT)
+	##	GPIO.output(powerPin, 0);		
 #		subprocess.call(['reboot', '-h', 'now'], shell=False)
-		release = True;
-		time.sleep(10);
+	##	release = True;
+	##	time.sleep(10);
