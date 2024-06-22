@@ -193,7 +193,7 @@ while (True):
 			f = open("/home/pi/CubeSatSim/command_control", "r")
 			f.close()
 			print("command and control will be deactivated")
-			os.system("echo 'command and control activated due to push button!' | wall")
+			os.system("echo 'command and control deactivated due to push button!' | wall")
 			os.system('sudo rm /home/pi/CubeSatSim/command_control')
 		except:
 			print("command and control will be activated")
