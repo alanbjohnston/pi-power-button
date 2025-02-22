@@ -20,7 +20,7 @@ def change_mode():
 	push_button = 26
 	powerPin = 16
 	txPin = 27
-
+	sleep(1)
 	if GPIO.input(push_button):
 		print("sudo reboot -h now")
 		os.system("echo 'reboot due to push button!' | wall")
