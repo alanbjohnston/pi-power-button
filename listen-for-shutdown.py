@@ -77,7 +77,7 @@ def change_mode():
 		GPIO.output(powerPin, 1)
 		sleep(0.35)
 	sleep(0.65)
-	if (GPIO.input(push_button):
+	if GPIO.input(push_button):
 		print("sudo shutdown -h now")
 		os.system("echo 'shutdown due to push button!' | wall")
 		GPIO.setwarnings(False)
