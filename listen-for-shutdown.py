@@ -123,8 +123,6 @@ powerPin = 16
 txPin = 27
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BCM)
-GPIO.setwarnings(False)
 GPIO.setup(txPin, GPIO.OUT)
 GPIO.output(txPin, 0)
 GPIO.setwarnings(False)
@@ -133,5 +131,7 @@ GPIO.output(powerPin, 1)
 
 while (True):
 	time.sleep(1)
+	GPIO.setmode(GPIO.BCM)
+	GPIO.setwarnings(False)
 	GPIO.wait_for_edge(26, GPIO.FALLING)
 	change_mode()
