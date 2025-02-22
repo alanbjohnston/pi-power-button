@@ -7,7 +7,7 @@ import os
 from time import sleep
 
 def blink(times):
-	blink_time = 0.09
+	blink_time = 0.1
 	powerPin = 16
 	for i in range(times):	# blink times
 		GPIO.output(powerPin, 0) 
@@ -20,7 +20,7 @@ def change_mode():
 	push_button = 26
 	powerPin = 16
 	txPin = 27
-	sleep(0.65)
+	sleep(0.75)
 	if GPIO.input(push_button):
 		print("sudo reboot -h now")
 		os.system("echo 'reboot due to push button!' | wall")
