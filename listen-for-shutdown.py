@@ -7,20 +7,20 @@ import os
 from time import sleep
 
 def blink(times):
-	blink_time = 0.08
+	blink_time = 0.09
 	powerPin = 16
 	for i in range(times):	# blink times
 		GPIO.output(powerPin, 0) 
 		sleep(blink_time)
 		GPIO.output(powerPin, 1)
 		sleep(blink_time)
-	sleep(blink_time * 15 - blink_time)
+	sleep(0.65)
 
 def change_mode():
 	push_button = 26
 	powerPin = 16
 	txPin = 27
-	sleep(1)
+	sleep(0.65)
 	if GPIO.input(push_button):
 		print("sudo reboot -h now")
 		os.system("echo 'reboot due to push button!' | wall")
@@ -104,21 +104,7 @@ def change_mode():
 		os.system("echo 'command and control activated by push button!' | wall")
 		os.system('sudo systemctl restart command')
 	sleep(1)
-	
-#txPin = 0
-#GPIO.setmode(GPIO.BCM)
-#GPIO.setup(26, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-#GPIO.setup(12, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-#if GPIO.input(12) == False:
-#	powerPin = 16
-#	txPin = 27
-#	GPIO.setwarnings(False)
-#	GPIO.setup(txPin, GPIO.OUT)
-#	GPIO.output(txPin, 0)
-#else:
-#	powerPin = 17
 
-	
 powerPin = 16
 txPin = 27
 GPIO.setmode(GPIO.BCM)
@@ -133,4 +119,4 @@ while (True):
 	sleep(1)
 	GPIO.wait_for_edge(26, GPIO.FALLING)
 	change_mode()
-	sleep(10)
+	sleep(5)
