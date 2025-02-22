@@ -7,7 +7,7 @@ import os
 from time import sleep
 
 def blink(times):
-	blink_time = 0.07
+	blink_time = 0.08
 	powerPin = 16
 	for i in range(times):	# blink times
 		GPIO.output(powerPin, 0) 
