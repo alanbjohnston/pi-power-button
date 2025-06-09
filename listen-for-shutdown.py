@@ -4,217 +4,119 @@ import RPi.GPIO as GPIO
 import subprocess
 import time
 import os
+from time import sleep
 
-txPin = 0
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(26, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(12, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-if GPIO.input(12) == False:
+def blink(times):
+	blink_time = 0.1
+	powerPin = 16
+	for i in range(times):	# blink times
+		GPIO.output(powerPin, 0) 
+		sleep(blink_time)
+		GPIO.output(powerPin, 1)
+		sleep(blink_time)
+	sleep(0.65)
+
+def change_mode():
+	push_button = 26
 	powerPin = 16
 	txPin = 27
-	GPIO.setwarnings(False)
-	GPIO.setup(txPin, GPIO.OUT)
-	GPIO.output(txPin, 0)
-else:
-	powerPin = 17
-GPIO.setwarnings(False)
-GPIO.setup(powerPin, GPIO.OUT)
-GPIO.output(powerPin, 1)	
-
-while (True):
-	time.sleep(1)
-	GPIO.wait_for_edge(26, GPIO.FALLING)
-
-	release = False;
-	time.sleep(1)
-	if GPIO.input(26):
+	sleep(0.75)
+	if GPIO.input(push_button):
 		print("sudo reboot -h now")
 		os.system("echo 'reboot due to push button!' | wall")
 		GPIO.setwarnings(False)
 		GPIO.setup(powerPin, GPIO.OUT)
 		GPIO.output(powerPin, 0);		
 		subprocess.call(['reboot', '-h', 'now'], shell=False)
-		release = True;
-#		time.sleep(10);
-	GPIO.output(powerPin, 0); # blink once
-	time.sleep(0.1);
-	GPIO.output(powerPin, 1);
-	time.sleep(1.5)
-	if (GPIO.input(26) and (release == False)):
+		return
+	blink(1)
+	if GPIO.input(push_button):
 		print("switch to AFSK")
 		os.system("echo 'switch to AFSK due to push button!' | wall")
 		os.system("/home/pi/CubeSatSim/config -a")
-#		f = open("/home/pi/CubeSatSim/.mode", "w")
-#		f.write("a")
-#		f.close()
-#		os.system("sudo sed -i ':a;N;$!ba;s/\nforce_turbo=1//g' /boot/config.txt")
-		# os.system("sudo systemctl restart cubesatsim")
-		release = True;
-	if (release == False):
-		GPIO.output(powerPin, 0); # blink twice
-		time.sleep(0.1);
-		GPIO.output(powerPin, 1);
-		time.sleep(0.1);
-		GPIO.output(powerPin, 0);
-		time.sleep(0.1);
-		GPIO.output(powerPin, 1);	
-		time.sleep(1.5)
-	if (GPIO.input(26) and (release == False)):
+		return
+	blink(2)	
+	if GPIO.input(push_button):
 		print("switch to FSK")
 		os.system("echo 'switch to FSK due to push button!' | wall")
 		os.system("/home/pi/CubeSatSim/config -f")		
-#		f = open("/home/pi/CubeSatSim/.mode", "w")
-#		f.write("f")
-#		f.close()
-#		os.system("if ! grep -q force_turbo=1 /boot/config.txt ; then sudo sh -c 'echo force_turbo=1 >> /boot/config.txt'; fi")
-		# os.system("sudo systemctl restart cubesatsim")
-		release = True;
-	if (release == False):
-		GPIO.output(powerPin, 0); # blink three times
-		time.sleep(0.1);
-		GPIO.output(powerPin, 1);
-		time.sleep(0.1);
-		GPIO.output(powerPin, 0);
-		time.sleep(0.1);
-		GPIO.output(powerPin, 1);	
-		time.sleep(0.1)
-		GPIO.output(powerPin, 0);
-		time.sleep(0.1);
-		GPIO.output(powerPin, 1);	
-		time.sleep(1.5)
-	if (GPIO.input(26) and (release == False)):
+		return
+	blink(3)
+	if GPIO.input(push_button):
 		print("switch to BPSK")
 		os.system("echo 'switch to BPSK due to push button!' | wall")
 		os.system("/home/pi/CubeSatSim/config -b")
-#		f = open("/home/pi/CubeSatSim/.mode", "w")
-#		f.write("b")
-#		f.close()
-#		os.system("if ! grep -q force_turbo=1 /boot/config.txt ; then sudo sh -c 'echo force_turbo=1 >> /boot/config.txt'; fi")
-		# os.system("sudo systemctl restart cubesatsim")
-		release = True;
-	if (release == False):
-		GPIO.output(powerPin, 0); # blink four times
-		time.sleep(0.1);
-		GPIO.output(powerPin, 1);
-		time.sleep(0.1);
-		GPIO.output(powerPin, 0);
-		time.sleep(0.1);
-		GPIO.output(powerPin, 1);	
-		time.sleep(0.1)
-		GPIO.output(powerPin, 0);
-		time.sleep(0.1);
-		GPIO.output(powerPin, 1);	
-		time.sleep(0.1)
-		GPIO.output(powerPin, 0);
-		time.sleep(0.1);
-		GPIO.output(powerPin, 1);
-		time.sleep(1.5)
-	if (GPIO.input(26) and (release == False)):
+		return
+	blink(4)
+	if GPIO.input(push_button):
 		print("switch to SSTV")
 		os.system("echo 'switch to SSTV due to push button!' | wall")
 		os.system("/home/pi/CubeSatSim/config -s")
-#		f = open("/home/pi/CubeSatSim/.mode", "w")
-#		f.write("s")
-#		f.close()
-#		os.system("sudo sed -i ':a;N;$!ba;s/\nforce_turbo=1//g' /boot/config.txt")
-		# os.system("sudo systemctl restart cubesatsim")
-		release = True;
-	if (release == False):
-		GPIO.output(powerPin, 0); # blink five times
-		time.sleep(0.1);
-		GPIO.output(powerPin, 1);
-		time.sleep(0.1);
-		GPIO.output(powerPin, 0);
-		time.sleep(0.1);
-		GPIO.output(powerPin, 1);	
-		time.sleep(0.1)
-		GPIO.output(powerPin, 0);
-		time.sleep(0.1);
-		GPIO.output(powerPin, 1);	
-		time.sleep(0.1)
-		GPIO.output(powerPin, 0);
-		time.sleep(0.1);
-		GPIO.output(powerPin, 1);
-		time.sleep(0.1)
-		GPIO.output(powerPin, 0);
-		time.sleep(0.1);
-		GPIO.output(powerPin, 1);
-		time.sleep(1.5)
-	if (GPIO.input(26) and (release == False)):
+		return
+	blink(5)
+	if GPIO.input(push_button):
 		print("switch to CW")
 		os.system("echo 'switch to CW due to push button!' | wall")
 		os.system("/home/pi/CubeSatSim/config -m")
-#		f = open("/home/pi/CubeSatSim/.mode", "w")
-#		f.write("m")
-#		f.close()
-#		os.system("sudo sed -i ':a;N;$!ba;s/\nforce_turbo=1//g' /boot/config.txt")
-		# os.system("sudo systemctl restart cubesatsim")
-		release = True;
-	if (release == False):
-		GPIO.output(powerPin, 0); # blink slowly to indicate shutdown
-		time.sleep(0.5);
-		GPIO.output(powerPin, 1);
-		time.sleep(0.5);
-		GPIO.output(powerPin, 0);
-		time.sleep(0.5);
-		GPIO.output(powerPin, 1);
-		time.sleep(0.5);
-		GPIO.output(powerPin, 0);
-		time.sleep(0.5);
-		GPIO.output(powerPin, 1);
-		time.sleep(1.5);
-	if (GPIO.input(26) and (release == False)):
+		return
+	blink(6)
+	if GPIO.input(push_button):
+		print("switch to Repeater")
+		os.system("echo 'switch to Repeater due to push button!' | wall")
+		os.system("/home/pi/CubeSatSim/config -e")
+		return
+	blink(7)
+	if GPIO.input(push_button):
+		print("switch to FunCube")
+		os.system("echo 'switch to FunCube due to push button!' | wall")
+		os.system("/home/pi/CubeSatSim/config -j")
+		return
+	for i in range(3):	# blink 3 times slowly
+		GPIO.output(powerPin, 0) 
+		sleep(0.35)
+		GPIO.output(powerPin, 1)
+		sleep(0.35)
+	sleep(0.65)
+	if GPIO.input(push_button):
 		print("sudo shutdown -h now")
 		os.system("echo 'shutdown due to push button!' | wall")
 		GPIO.setwarnings(False)
 		GPIO.setup(powerPin, GPIO.OUT)
 		subprocess.call(['shutdown', '-h', 'now'], shell=False)
-		release = True;
-	if (release == False):
-		GPIO.output(powerPin, 0); # blink very slowly to indicate cc toggle
-		time.sleep(1.0);
-		GPIO.output(powerPin, 1);
-		time.sleep(1.0);
-		GPIO.output(powerPin, 0);
-		time.sleep(1.0);
-		GPIO.output(powerPin, 1);
-		time.sleep(1.0);
-		GPIO.output(powerPin, 0);
-		time.sleep(1.0);
-		GPIO.output(powerPin, 1);
-#		time.sleep(1.0);
-#		GPIO.output(powerPin, 0);	
-#	if (GPIO.input(26) and (release == False)):
-#	else:	
-		print("toggle command and control mode")
-	
-		try:
-			f = open("/home/pi/CubeSatSim/command_control", "r")
-			f.close()
-			print("command and control will be deactivated")
-			os.system('sudo rm /home/pi/CubeSatSim/command_control')
-			os.system("echo 'command and control deactivated by push button!' | wall")
-			os.system('sudo systemctl restart command')
-		except:
-			print("command and control will be activated")
-			os.system('touch /home/pi/CubeSatSim/command_control')
-			os.system("echo 'command and control activated by push button!' | wall")
-			os.system('sudo systemctl restart command')
-	
-	#	GPIO.setwarnings(False)
-	#	GPIO.setup(powerPin, GPIO.OUT)
-	#	subprocess.call(['', '-h', 'now'], shell=False)
-	#	os.system('sudo systemctl restart cubesatsim')
-	#	release = True;	
+		return
+	for i in range(3):	# blink two times even more slowly
+		GPIO.output(powerPin, 0) 
+		sleep(0.7)
+		GPIO.output(powerPin, 1)
+		sleep(0.7)
+	sleep(0.7)
+	print("toggle command and control mode")
+	try:
+		f = open("/home/pi/CubeSatSim/command_control", "r")
+		f.close()
+		print("command and control will be deactivated")
+		os.system('sudo rm /home/pi/CubeSatSim/command_control')
+		os.system("echo 'command and control deactivated by push button!' | wall")
+		os.system('sudo systemctl restart command')
+	except:
+		print("command and control will be activated")
+		os.system('touch /home/pi/CubeSatSim/command_control')
+		os.system("echo 'command and control activated by push button!' | wall")
+		os.system('sudo systemctl restart command')
+	sleep(1)
 
-	#else:
-	#	if (txPin != 0):
-	#		GPIO.setwarnings(False)
-	#	GPIO.output(txPin, 0)	
-	#	print("sudo  -h now")
-	#	GPIO.setwarnings(False)
-	#	GPIO.setup(powerPin, GPIO.OUT)
-	#	GPIO.output(powerPin, 0);		
-	#	subprocess.call(['', '-h', 'now'], shell=False)
-	#	release = True;
-	time.sleep(10);
+powerPin = 16
+txPin = 27
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
+GPIO.setup(txPin, GPIO.OUT)
+GPIO.output(txPin, 0)
+GPIO.setup(powerPin, GPIO.OUT)
+GPIO.output(powerPin, 1)
+GPIO.setup(26, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
+while (True):
+	sleep(1)
+	GPIO.wait_for_edge(26, GPIO.FALLING)
+	change_mode()
+	sleep(5)
