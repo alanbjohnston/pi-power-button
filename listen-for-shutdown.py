@@ -22,12 +22,8 @@ def change_mode():
 	txPin = 27
 	sleep(0.75)
 	if GPIO.input(push_button):
-		print("sudo reboot -h now")
-		os.system("echo 'reboot due to push button!' | wall")
-		GPIO.setwarnings(False)
-		GPIO.setup(powerPin, GPIO.OUT)
-		GPIO.output(powerPin, 0);		
-		subprocess.call(['reboot', '-h', 'now'], shell=False)
+		print("Next")
+		os.system("/home/pi/CubeSatSim/config -N")
 		return
 	blink(1)
 	if GPIO.input(push_button):
