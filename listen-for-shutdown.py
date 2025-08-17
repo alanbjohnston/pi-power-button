@@ -172,4 +172,4 @@ while (True):
 	sleep(1)
 	GPIO.wait_for_edge(26, GPIO.FALLING)
 	change_mode()
-	sleep(5)
+	sleep(2)
