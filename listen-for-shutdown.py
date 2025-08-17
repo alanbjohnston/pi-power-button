@@ -93,7 +93,7 @@ def change_mode():
 			file = open("/home/pi/CubeSatSim/failure_mode.txt")
 			fail_mode = int(file.read(2))
 			print(fail_mode)
-			if (fail_mode == -1):
+			if (fail_mode != -1):
 				print("Simulated failure mode")
 				os.system("/home/pi/CubeSatSim/config -N")
 				return
