@@ -95,7 +95,7 @@ def change_mode():
 			config = file.readline().split()		
 			print(config[22], config[23], config[24], config[25])
 		except:
-			print("Can't open config file"
+			print("Can't open config file")
 			
 		increment_mode()
 		return
