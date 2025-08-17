@@ -25,10 +25,10 @@ def increment_mode():
 		sleep(2.5)
 
 	elif (mode == 'f'):
-		mode = 'b'
+#		mode = 'b'
 		blink(3)
 		sleep(2.5)
-	
+		system("/home/pi/CubeSatSim/config -b")
 	elif (mode == 'b'):
 		mode = 's'
 		blink(4)
@@ -43,30 +43,30 @@ def increment_mode():
 		blink(1)
 		sleep(2.5)
 
-	try:	
-		file = open("/home/pi/CubeSatSim/.mode", "w")
-		count_string = str(command_count)
-		file.write(mode)
-		file.close()
-		print(".mode file written")
+#	try:	
+#		file = open("/home/pi/CubeSatSim/.mode", "w")
+#		count_string = str(command_count)
+#		file.write(mode)
+#		file.close()
+#		print(".mode file written")
 		
-		GPIO.setwarnings(False)
-		GPIO.output(txLed, 0)
-		GPIO.output(powerPin, 0)
-		print("sudo reboot -h now")
-		GPIO.setwarnings(False)
-		GPIO.setup(powerPin, GPIO.OUT)
-		GPIO.output(powerPin, 0);
+#		GPIO.setwarnings(False)
+#		GPIO.output(txLed, 0)
+#		GPIO.output(powerPin, 0)
+#		print("sudo reboot -h now")
+#		GPIO.setwarnings(False)
+#		GPIO.setup(powerPin, GPIO.OUT)
+#		GPIO.output(powerPin, 0);
 #		system("reboot -h now")
 #		release = True;
 
-		print("Changing mode now")
+#		print("Changing mode now")
 #		system("/home/pi/CubeSatSim/config -" + mode)
-		system("reboot -h now")
+#		system("reboot -h now")
 
-		sleep(10);
-	except:
-		print("can't write to .mode file")
+#		sleep(10);
+#	except:
+#		print("can't write to .mode file")
 		
 
 def blink(times):
