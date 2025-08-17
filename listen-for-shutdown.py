@@ -92,7 +92,7 @@ def change_mode():
 		try:
 			file = open("/home/pi/CubeSatSim/sim.cfg")
 	#		callsign = file.readline().split(" ")[0]
-			config = file.readline().split()		
+			config = file.readline().split(" ")		
 			print(config[10], config[11], config[12], config[13])
 		except:
 			print("Can't open config file")
