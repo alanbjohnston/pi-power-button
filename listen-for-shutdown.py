@@ -90,12 +90,16 @@ def change_mode():
 #		os.system("/home/pi/CubeSatSim/config -N")
 
 		try:
-			file = open("/home/pi/CubeSatSim/sim.cfg")
-	#		callsign = file.readline().split(" ")[0]
-			config = file.readline().split(" ")		
-			print(config[10], config[11], config[12], config[13])
+			file = open("/home/pi/CubeSatSim/failure_mode.txt")
+			fail_mode = int(file.read(2))
+			if (fail_mode == -1):
+				print("Simulated failure mode")
+				os.system("/home/pi/CubeSatSim/config -N")
+				return
 		except:
 			print("Can't open config file")
+			os.system("/home/pi/CubeSatSim/config -N")
+			return
 			
 		increment_mode()
 		return
