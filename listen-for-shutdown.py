@@ -6,6 +6,69 @@ import time
 import os
 from time import sleep
 
+def increment_mode():
+	print("increment mode")
+	powerPin = 16
+	try:
+		file = open("/home/pi/CubeSatSim/.mode")
+		mode = file.read(1)
+	except:
+#		mode = "f"
+		if (debug_mode == 1):
+			print("Can't open .mode file") # , defaulting to FSK")
+	file.close()
+	print("Mode is: ")
+	print(mode)
+	if (mode == 'a'):
+		mode = 'f'
+		blink(2)
+		sleep(2.5)
+
+	elif (mode == 'f'):
+		mode = 'b'
+		blink(3)
+		sleep(2.5)
+	
+	elif (mode == 'b'):
+		mode = 's'
+		blink(4)
+		sleep(2.5)
+
+	elif (mode == 's'):
+		mode = 'm'
+		blink(5)
+		sleep(2.5)
+	else:
+		mode = 'a'
+		blink(1)
+		sleep(2.5)
+
+	try:	
+		file = open("/home/pi/CubeSatSim/.mode", "w")
+		count_string = str(command_count)
+		file.write(mode)
+		file.close()
+		print(".mode file written")
+		
+		GPIO.setwarnings(False)
+		GPIO.output(txLed, 0)
+		GPIO.output(powerPin, 0)
+		print("sudo reboot -h now")
+		GPIO.setwarnings(False)
+		GPIO.setup(powerPin, GPIO.OUT)
+		GPIO.output(powerPin, 0);
+#		system("reboot -h now")
+#		release = True;
+
+		print("Changing mode now")
+#		system("/home/pi/CubeSatSim/config -" + mode)
+		system("reboot -h now")
+
+		sleep(10);
+	except:
+		print("can't write to .mode file")
+		
+
 def blink(times):
 	blink_time = 0.1
 	powerPin = 16
@@ -23,7 +86,8 @@ def change_mode():
 	sleep(0.75)
 	if GPIO.input(push_button):
 		print("Next")
-		os.system("/home/pi/CubeSatSim/config -N")
+#		os.system("/home/pi/CubeSatSim/config -N")
+		increment_mode()
 		return
 	blink(1)
 	if GPIO.input(push_button):
