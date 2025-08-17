@@ -23,26 +23,27 @@ def increment_mode():
 		mode = 'f'
 		blink(2)
 		sleep(2.5)
-
+		os.system("/home/pi/CubeSatSim/config -f")
 	elif (mode == 'f'):
 #		mode = 'b'
 		blink(3)
 		sleep(2.5)
-		system("/home/pi/CubeSatSim/config -b")
+		os.system("/home/pi/CubeSatSim/config -b")
 	elif (mode == 'b'):
 		mode = 's'
 		blink(4)
 		sleep(2.5)
-
+		os.system("/home/pi/CubeSatSim/config -s")
 	elif (mode == 's'):
 		mode = 'm'
 		blink(5)
 		sleep(2.5)
+		os.system("/home/pi/CubeSatSim/config -m")
 	else:
 		mode = 'a'
 		blink(1)
 		sleep(2.5)
-
+		os.system("/home/pi/CubeSatSim/config -a")
 #	try:	
 #		file = open("/home/pi/CubeSatSim/.mode", "w")
 #		count_string = str(command_count)
