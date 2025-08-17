@@ -43,32 +43,7 @@ def increment_mode():
 		mode = 'a'
 		blink(1)
 		sleep(2.5)
-		os.system("/home/pi/CubeSatSim/config -a")
-#	try:	
-#		file = open("/home/pi/CubeSatSim/.mode", "w")
-#		count_string = str(command_count)
-#		file.write(mode)
-#		file.close()
-#		print(".mode file written")
-		
-#		GPIO.setwarnings(False)
-#		GPIO.output(txLed, 0)
-#		GPIO.output(powerPin, 0)
-#		print("sudo reboot -h now")
-#		GPIO.setwarnings(False)
-#		GPIO.setup(powerPin, GPIO.OUT)
-#		GPIO.output(powerPin, 0);
-#		system("reboot -h now")
-#		release = True;
-
-#		print("Changing mode now")
-#		system("/home/pi/CubeSatSim/config -" + mode)
-#		system("reboot -h now")
-
-#		sleep(10);
-#	except:
-#		print("can't write to .mode file")
-		
+		os.system("/home/pi/CubeSatSim/config -a")		
 
 def blink(times):
 	blink_time = 0.1
@@ -95,6 +70,9 @@ def change_mode():
 			print(fail_mode)
 			if (fail_mode != -1):
 				print("Simulated failure mode")
+				GPIO.output(powerPin, 0) 
+				sleep(0.5)
+				GPIO.output(powerPin, 1)
 				os.system("/home/pi/CubeSatSim/config -N")
 				return
 		except:
