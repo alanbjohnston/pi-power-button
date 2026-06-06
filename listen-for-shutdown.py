@@ -75,7 +75,7 @@ def change_mode():
 	if GPIO.input(push_button):
 		print("switch to PacSatSim")
 		os.system("echo 'switch to PacSatSim due to push button!' | wall")
-		os.system("/home/pi/CubeSatSim/config -p")
+		os.system("/home/pi/CubeSatSim/config -G")
 		return
 	for i in range(3):	# blink 3 times slowly
 		GPIO.output(powerPin, 0) 
