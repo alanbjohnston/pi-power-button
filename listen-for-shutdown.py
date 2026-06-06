@@ -71,6 +71,12 @@ def change_mode():
 		os.system("echo 'switch to FunCube due to push button!' | wall")
 		os.system("/home/pi/CubeSatSim/config -j")
 		return
+	blink(8)
+	if GPIO.input(push_button):
+		print("switch to FunCube")
+		os.system("echo 'switch to PacSatSim due to push button!' | wall")
+		os.system("/home/pi/CubeSatSim/config -j")
+		return
 	for i in range(3):	# blink 3 times slowly
 		GPIO.output(powerPin, 0) 
 		sleep(0.35)
