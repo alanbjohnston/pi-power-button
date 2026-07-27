@@ -107,16 +107,33 @@ def change_mode():
 
 powerPin = 16
 txPin = 27
+push_button = 26
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(txPin, GPIO.OUT)
 GPIO.output(txPin, 0)
 GPIO.setup(powerPin, GPIO.OUT)
+GPIO.output(powerPin, 0)
+GPIO.setup(push_button, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+sleep(20)
+if GPIO.input(push_button):
+		print("Activating WiFi access point!")
+		GPIO.output(powerPin, 1) 
+		sleep(0.1)
+		GPIO.output(powerPin, 0)
+		sleep(0.1)
+		GPIO.output(powerPin, 1) 
+		sleep(0.3)
+		GPIO.output(powerPin, 0)
+		sleep(0.1)
+		GPIO.output(powerPin, 1) 
+		sleep(0.3)
+		GPIO.output(powerPin, 0)
+		sleep(1)
+GPIO.setup(powerPin, GPIO.OUT)
 GPIO.output(powerPin, 1)
-GPIO.setup(26, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-
 while (True):
 	sleep(1)
-	GPIO.wait_for_edge(26, GPIO.FALLING)
+	GPIO.wait_for_edge(push_button, GPIO.FALLING)
 	change_mode()
 	sleep(5)
