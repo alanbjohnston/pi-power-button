@@ -127,7 +127,7 @@ GPIO.output(powerPin, 0)
 sleep(0.5)
 
 GPIO.setup(push_button, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-sleep(20)
+sleep(1)
 if not GPIO.input(push_button):
 		print("Activating WiFi access point!")
 		GPIO.output(powerPin, 1) 
