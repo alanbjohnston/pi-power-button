@@ -84,6 +84,8 @@ def change_mode():
 		sleep(0.35)
 	sleep(0.65)
 	if GPIO.input(push_button):
+		print("sudo nmcli connection down Hotspot")
+		os.system("sudo nmcli connection down Hotspot")
 		print("sudo shutdown -h now")
 		os.system("echo 'shutdown due to push button!' | wall")
 		GPIO.setwarnings(False)
@@ -140,6 +142,8 @@ if not GPIO.input(push_button): # if pushbutton is held down during boot
 		GPIO.output(powerPin, 1) 
 		sleep(0.3)
 		GPIO.output(powerPin, 0)
+		print("sudo nmcli device wifi hotspot con-name HotSpot ifname wlan0 ssid CubeSat password amsatao7")	
+		os.system("sudo nmcli device wifi hotspot con-name HotSpot ifname wlan0 ssid CubeSat password amsatao7")
 		sleep(2)
 GPIO.setup(powerPin, GPIO.OUT)
 GPIO.output(powerPin, 1)
