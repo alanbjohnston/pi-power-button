@@ -84,8 +84,8 @@ def change_mode():
 		sleep(0.35)
 	sleep(0.65)
 	if GPIO.input(push_button):
-		print("sudo nmcli connection up preconfigured")
-		os.system("sudo nmcli connection up preconfigured")
+		print("sudo nmcli connection down HotSpot")
+		os.system("sudo nmcli connection down HotSpot")
 		print("sudo shutdown -h now")
 		os.system("echo 'shutdown due to push button!' | wall")
 		GPIO.setwarnings(False)
