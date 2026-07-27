@@ -71,6 +71,12 @@ def change_mode():
 		os.system("echo 'switch to FunCube due to push button!' | wall")
 		os.system("/home/pi/CubeSatSim/config -j")
 		return
+	blink(8)
+	if GPIO.input(push_button):
+		print("switch to PacSat")
+		os.system("echo 'switch to PacSat due to push button!' | wall")
+		os.system("/home/pi/CubeSatSim/config -G")
+		return
 	for i in range(3):	# blink 3 times slowly
 		GPIO.output(powerPin, 0) 
 		sleep(0.35)
@@ -114,20 +120,26 @@ GPIO.setup(txPin, GPIO.OUT)
 GPIO.output(txPin, 0)
 GPIO.setup(powerPin, GPIO.OUT)
 GPIO.output(powerPin, 0)
+
+GPIO.output(powerPin, 1) 
+sleep(0.5)
+GPIO.output(powerPin, 0)
+sleep(0.5)
+
 GPIO.setup(push_button, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 sleep(20)
-if GPIO.input(push_button):
+if not GPIO.input(push_button):
 		print("Activating WiFi access point!")
 		GPIO.output(powerPin, 1) 
-		sleep(0.1)
+		sleep(0.2)
 		GPIO.output(powerPin, 0)
-		sleep(0.1)
+		sleep(0.2)
 		GPIO.output(powerPin, 1) 
-		sleep(0.3)
+		sleep(0.6)
 		GPIO.output(powerPin, 0)
-		sleep(0.1)
+		sleep(0.2)
 		GPIO.output(powerPin, 1) 
-		sleep(0.3)
+		sleep(0.6)
 		GPIO.output(powerPin, 0)
 		sleep(1)
 GPIO.setup(powerPin, GPIO.OUT)
